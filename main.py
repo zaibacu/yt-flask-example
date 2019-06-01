@@ -1,37 +1,13 @@
-import json
-from flask import Flask, render_template, request
+from flask import Flask
+
+from routes.admin import bp as admin_bp
+from routes.site import bp as site_bp
+from routes.health import bp as health_bp
 
 app = Flask('example')
 
-
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
-
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-    if request.method == 'POST':
-        data = request.form.to_dict()
-        print('Got some data! {}'.format(data))
-        first_name = data['first_name']
-        last_name = data['last_name']
-
-        with open('data/contact.jsonl', 'a') as f:
-            f.write(json.dumps(data) + '\n')
-
-        return render_template('thank-you.html',
-                               name='{first_name} {last_name}'.format(
-                                   first_name=first_name,
-                                   last_name=last_name
-                               ))
-    else:
-        return render_template('contact.html')
-
+app.register_blueprint(admin_bp, url_prefix='/admin')
+app.register_blueprint(site_bp)
+app.register_blueprint(health_bp, url_prefix='/-/')
 
 app.run(debug=True)

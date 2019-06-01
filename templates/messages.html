@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table class="highlight">
+    <thead>
+    <tr>
+        <th>Email</th>
+        <th>Text</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+    {% for msg in messages %}
+    <tr>
+        <td>{{ msg.email }}</td>
+        <td>{{ msg.text }}</td>
+    </tr>
+
+    {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}
