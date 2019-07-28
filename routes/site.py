@@ -1,6 +1,7 @@
-import json
-
 from flask import render_template, Blueprint, request
+
+from models import Contact
+from database import db
 
 bp = Blueprint('site', __name__)
 
@@ -22,9 +23,14 @@ def contact():
         print('Got some data! {}'.format(data))
         first_name = data['first_name']
         last_name = data['last_name']
-
-        with open('data/contact.jsonl', 'a') as f:
-            f.write(json.dumps(data) + '\n')
+        c = Contact(
+            first_name=first_name,
+            last_name=last_name,
+            email=data['email'],
+            text=data['text']
+        )
+        db.session.add(c)
+        db.session.commit()
 
         return render_template('thank-you.html',
                                name='{first_name} {last_name}'.format(
