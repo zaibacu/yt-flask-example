@@ -12,10 +12,10 @@ from database import db
 
 def create_app():
     app = Flask('example')
+
     app.register_blueprint(admin_bp, url_prefix='/admin')
     app.register_blueprint(site_bp)
     app.register_blueprint(health_bp, url_prefix='/-/')
-
     app.config.from_object(os.getenv('FLASK_CONFIG', 'config.DevConfig'))
 
     db.init_app(app)

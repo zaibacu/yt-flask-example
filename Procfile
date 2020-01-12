@@ -1,1 +1,2 @@
-web: gunicorn wsgi --log-file=-
+release: python init.py
+web: gunicorn wsgi
