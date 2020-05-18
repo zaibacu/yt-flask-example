@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="post">
+        <input type="text" name="username" placeholder="Prisijungimo vardas"/>
+        <input type="password" name="password1" placeholder="Slaptažodis"/>
+        <input type="password" name="password2" placeholder="Slaptažodis (pakartoti)"/>
+        <button class="btn btn-success">Registruotis</button>
+    </form>
+{% endblock %}
