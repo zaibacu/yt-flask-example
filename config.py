@@ -8,6 +8,7 @@ class BaseConfig(object):
 class DevConfig(BaseConfig):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///data/db.sqlite'
+    SECRET_KEY = "secret123"
 
 
 class ProdConfig(BaseConfig):

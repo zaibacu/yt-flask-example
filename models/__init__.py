@@ -14,3 +14,13 @@ class Contact(db.Model):
 
     def __repr__(self):
         return '<Contact name: {0}, email: {1}>'.format(self.name, self.email)
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), unique=True)
+    password_hash = db.Column(db.String(256))
+    is_admin = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<User name: {0}>'.format(self.username)
